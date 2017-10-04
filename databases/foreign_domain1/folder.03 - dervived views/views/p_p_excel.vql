@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW p_p_excel FOLDER = '/03 - dervived views' AS SELECT p_excel.product_id AS product_id, p_excel.category AS category, p_excel.brand AS brand, p_excel.product_name AS product_name, p_excel.description AS description, p_excel.key AS key FROM p_excel;
+
+ALTER VIEW p_p_excel
+ LAYOUT (p_excel = [20, 20, 200, 146]);
+
