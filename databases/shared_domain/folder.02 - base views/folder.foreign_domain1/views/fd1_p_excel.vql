@@ -1,0 +1,41 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC p_excel
+    FOLDER = '/02 - base views/foreign_domain1'
+    DATASOURCENAME=foreign_domain1
+    CATALOGNAME = '${databases.shared_domain.folder.02 - base views.folder.foreign_domain1.views.jdbc.p_excel.CATALOGNAME}'
+    RELATIONNAME='p_excel' 
+    OUTPUTSCHEMA (
+        product_id = 'product_id' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='VARCHAR', sourcetypeid='12', sourcetypedecimals='0', sourcetypesize='65536')  SORTABLE,
+        category = 'category' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='VARCHAR', sourcetypeid='12', sourcetypedecimals='0', sourcetypesize='65536')  SORTABLE,
+        brand = 'brand' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='VARCHAR', sourcetypeid='12', sourcetypedecimals='0', sourcetypesize='65536')  SORTABLE,
+        product_name = 'product_name' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='VARCHAR', sourcetypeid='12', sourcetypedecimals='0', sourcetypesize='65536')  SORTABLE,
+        description = 'description' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='VARCHAR', sourcetypeid='12', sourcetypedecimals='0', sourcetypesize='65536')  SORTABLE,
+        key = 'key' :'java.lang.Long' (OPT) (sourcetyperadix='10', sourcetypename='BIGINT', sourcetypeid='-5', sourcetypedecimals='0', sourcetypesize='19')  ESCAPE SORTABLE
+    );
+
+CREATE OR REPLACE TABLE fd1_p_excel I18N us_pst (
+        product_id:text (sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '65536', sourcetypeid = '12'), 
+        category:text (sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '65536', sourcetypeid = '12'), 
+        brand:text (sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '65536', sourcetypeid = '12'), 
+        product_name:text (sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '65536', sourcetypeid = '12'), 
+        description:text (sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '65536', sourcetypeid = '12'), 
+        key:long (sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '19', sourcetypeid = '-5')
+    )
+    FOLDER = '/02 - base views/foreign_domain1'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD p_excel(
+        I18N us_pst
+        CONSTRAINTS (
+             ADD product_id (any) OPT ANY
+             ADD category (any) OPT ANY
+             ADD brand (any) OPT ANY
+             ADD product_name (any) OPT ANY
+             ADD description (any) OPT ANY
+             ADD key (any) OPT ANY
+        )
+        OUTPUTLIST (brand, category, description, key, product_id, product_name
+        )
+        WRAPPER (jdbc p_excel)
+    );
+

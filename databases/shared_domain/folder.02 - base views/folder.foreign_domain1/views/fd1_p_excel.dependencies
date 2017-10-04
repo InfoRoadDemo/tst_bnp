@@ -1,0 +1,4 @@
+﻿/databases/shared_domain/folder.02 - base views/02 - base views.vql
+/databases/shared_domain/folder.02 - base views/folder.foreign_domain1/foreign_domain1.vql
+/databases/shared_domain/folder.01 - data source/01 - data source.vql
+/databases/shared_domain/folder.01 - data source/datasources/jdbc/foreign_domain1.vql

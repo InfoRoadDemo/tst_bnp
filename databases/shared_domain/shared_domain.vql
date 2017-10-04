@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE DATABASE shared_domain '';
+
+ALTER DATABASE shared_domain
+  CHARSET DEFAULT;
+
