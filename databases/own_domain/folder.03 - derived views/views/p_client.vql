@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW p_client FOLDER = '/03 - derived views' AS SELECT bv_client.client_id AS client_id, bv_client.name AS name, bv_client.surname AS surname, bv_client.client_type AS client_type, rownum() AS key FROM bv_client;
+
+ALTER VIEW p_client
+ LAYOUT (bv_client = [20, 20, 200, 105]);
+

@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW dv_join_with_other_domain FOLDER = '/03 - derived views' AS SELECT p_client.client_id AS client_id, p_client.name AS name, p_client.surname AS surname, p_client.client_type AS client_type, fd1_p_excel.product_id AS product_id, fd1_p_excel.category AS category, fd1_p_excel.brand AS brand, fd1_p_excel.product_name AS product_name, fd1_p_excel.description AS description, fd1_p_excel.key AS key FROM p_client AS p_client INNER JOIN shared_domain.fd1_p_excel AS fd1_p_excel ON p_client.key = fd1_p_excel.key ;
+
+ALTER VIEW dv_join_with_other_domain
+ LAYOUT (p_client = [20, 20, 200, 126], fd1_p_excel = [250, 20, 200, 146]);
+

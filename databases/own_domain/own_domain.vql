@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE DATABASE own_domain '';
+
+ALTER DATABASE own_domain
+  CHARSET DEFAULT;
+

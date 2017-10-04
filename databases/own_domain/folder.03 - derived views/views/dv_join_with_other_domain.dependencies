@@ -1,0 +1,6 @@
+﻿/databases/own_domain/folder.03 - derived views/03 - derived views.vql
+/databases/own_domain/folder.02 - base views/02 - base views.vql
+/databases/own_domain/folder.01 - data sources/01 - data sources.vql
+/databases/own_domain/folder.01 - data sources/datasources/jdbc/ds_mysql.vql
+/databases/own_domain/folder.02 - base views/views/bv_client.vql
+/databases/own_domain/folder.03 - derived views/views/p_client.vql
