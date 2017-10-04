@@ -1,0 +1,24 @@
+﻿CREATE OR REPLACE TABLE bv_excel I18N us_pst (
+        product_id:text, 
+        category:text, 
+        brand:text, 
+        product_name:text, 
+        description:text
+    )
+    FOLDER = '/02 - base views'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD ds_excel(
+        I18N us_pst
+        CONSTRAINTS (
+             ADD product_id (any) OPT ANY
+             ADD category (any) OPT ANY
+             ADD brand (any) OPT ANY
+             ADD product_name (any) OPT ANY
+             ADD description (any) OPT ANY
+        )
+        OUTPUTLIST (brand, category, description, product_id, product_name
+        )
+        WRAPPER (custom ds_excel)
+    );
+

@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE DATABASE foreign_domain1 '';
+
+ALTER DATABASE foreign_domain1
+  CHARSET DEFAULT;
+
