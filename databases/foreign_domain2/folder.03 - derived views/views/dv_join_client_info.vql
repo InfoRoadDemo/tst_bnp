@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW dv_join_client_info FOLDER = '/03 - derived views' AS SELECT bv_client.client_id AS client_id, bv_client.name AS name, bv_client.surname AS surname, bv_client.client_type AS client_type, bv_client_type.code AS code, bv_client_type.value AS value FROM bv_client AS bv_client INNER JOIN bv_client_type AS bv_client_type ON bv_client.client_type = bv_client_type.code ;
+
+ALTER VIEW dv_join_client_info
+ LAYOUT (bv_client = [20, 20, 200, 106], bv_client_type = [250, 20, 200, 66]);
+

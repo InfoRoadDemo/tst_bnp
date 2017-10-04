@@ -1,0 +1,32 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC authors
+    FOLDER = '/02 - base views'
+    DATASOURCENAME=ds_mysql
+    CATALOGNAME = '${databases.foreign_domain2.folder.02 - base views.views.jdbc.authors.CATALOGNAME}'
+    RELATIONNAME='authors' 
+    OUTPUTSCHEMA (
+        id = 'id' :'java.lang.Integer' (OPT) (sourcetyperadix='10', sourcetypename='INT', sourcetypeid='4', sourcetypedecimals='0', sourcetypesize='10')  SORTABLE,
+        name = 'name' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='VARCHAR', sourcetypeid='12', sourcetypesize='20')  SORTABLE,
+        email = 'email' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='VARCHAR', sourcetypeid='12', sourcetypesize='20')  SORTABLE
+    );
+
+CREATE OR REPLACE TABLE bv_authors I18N us_pst (
+        id:int (sourcetyperadix = '10', sourcetypedecimals = '0', description = '', sourcetypesize = '10', sourcetypeid = '4'), 
+        name:text (sourcetyperadix = '10', description = '', sourcetypesize = '20', sourcetypeid = '12'), 
+        email:text (sourcetyperadix = '10', description = '', sourcetypesize = '20', sourcetypeid = '12')
+    )
+    FOLDER = '/02 - base views'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD authors(
+        I18N us_pst
+        CONSTRAINTS (
+             ADD id (any) OPT ANY
+             ADD name (any) OPT ANY
+             ADD email (any) OPT ANY
+        )
+        OUTPUTLIST (email, id, name
+        )
+        WRAPPER (jdbc authors)
+    );
+

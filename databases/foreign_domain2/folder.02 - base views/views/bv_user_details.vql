@@ -1,0 +1,47 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC user_details
+    FOLDER = '/02 - base views'
+    DATASOURCENAME=ds_mysql
+    CATALOGNAME = '${databases.foreign_domain2.folder.02 - base views.views.jdbc.user_details.CATALOGNAME}'
+    RELATIONNAME='user_details' 
+    OUTPUTSCHEMA (
+        user_id = 'user_id' :'java.lang.Integer' (OPT) (sourcetyperadix='10', sourcetypename='INT', sourcetypeid='4', sourcetypedecimals='0', sourcetypesize='10')  NOT NULL SORTABLE,
+        username = 'username' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='VARCHAR', sourcetypeid='12', sourcetypesize='255')  SORTABLE,
+        first_name = 'first_name' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='VARCHAR', sourcetypeid='12', sourcetypesize='50')  SORTABLE,
+        last_name = 'last_name' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='VARCHAR', sourcetypeid='12', sourcetypesize='50')  SORTABLE,
+        gender = 'gender' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='VARCHAR', sourcetypeid='12', sourcetypesize='10')  SORTABLE,
+        password = 'password' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='VARCHAR', sourcetypeid='12', sourcetypesize='50')  SORTABLE,
+        status = 'status' :'java.lang.Byte' (OPT) (sourcetyperadix='10', sourcetypename='TINYINT', sourcetypeid='-6', sourcetypedecimals='0', sourcetypesize='3')  SORTABLE
+    )
+    CONSTRAINT 'PRIMARY' PRIMARY KEY ( 'user_id' )
+    INDEX 'PRIMARY' CLUSTER UNIQUE PRIMARY ( 'user_id' );
+
+CREATE OR REPLACE TABLE bv_user_details I18N us_pst (
+        user_id:int (sourcetyperadix = '10', sourcetypedecimals = '0', description = '', sourcetypesize = '10', sourcetypeid = '4'), 
+        username:text (sourcetyperadix = '10', description = '', sourcetypesize = '255', sourcetypeid = '12'), 
+        first_name:text (sourcetyperadix = '10', description = '', sourcetypesize = '50', sourcetypeid = '12'), 
+        last_name:text (sourcetyperadix = '10', description = '', sourcetypesize = '50', sourcetypeid = '12'), 
+        gender:text (sourcetyperadix = '10', description = '', sourcetypesize = '10', sourcetypeid = '12'), 
+        password:text (sourcetyperadix = '10', description = '', sourcetypesize = '50', sourcetypeid = '12'), 
+        status:int (sourcetyperadix = '10', sourcetypedecimals = '0', description = '', sourcetypesize = '3', sourcetypeid = '-6')
+    )
+    FOLDER = '/02 - base views'
+    CONSTRAINT 'PRIMARY' PRIMARY KEY ( 'user_id' )
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD user_details(
+        I18N us_pst
+        CONSTRAINTS (
+             ADD user_id (any) OPT ANY
+             ADD username (any) OPT ANY
+             ADD first_name (any) OPT ANY
+             ADD last_name (any) OPT ANY
+             ADD gender (any) OPT ANY
+             ADD password (any) OPT ANY
+             ADD status (any) OPT ANY
+        )
+        OUTPUTLIST (first_name, gender, last_name, password, status, user_id, username
+        )
+        WRAPPER (jdbc user_details)
+    );
+

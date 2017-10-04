@@ -1,0 +1,41 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC address
+    FOLDER = '/02 - base views'
+    DATASOURCENAME=ds_mysql
+    CATALOGNAME = '${databases.foreign_domain2.folder.02 - base views.views.jdbc.address.CATALOGNAME}'
+    RELATIONNAME='address' 
+    OUTPUTSCHEMA (
+        client_fid = 'client_fid' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='VARCHAR', sourcetypeid='12', sourcetypesize='50')  NOT NULL SORTABLE,
+        street = 'street' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='VARCHAR', sourcetypeid='12', sourcetypesize='100')  SORTABLE,
+        city = 'city' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='VARCHAR', sourcetypeid='12', sourcetypesize='100')  SORTABLE,
+        zip = 'zip' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='VARCHAR', sourcetypeid='12', sourcetypesize='100')  SORTABLE,
+        state = 'state' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='VARCHAR', sourcetypeid='12', sourcetypesize='100')  SORTABLE,
+        primary_phone = 'primary_phone' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypename='VARCHAR', sourcetypeid='12', sourcetypesize='100')  SORTABLE
+    );
+
+CREATE OR REPLACE TABLE bv_address I18N us_pst (
+        client_fid:text (sourcetyperadix = '10', description = '', sourcetypesize = '50', sourcetypeid = '12'), 
+        street:text (sourcetyperadix = '10', description = '', sourcetypesize = '100', sourcetypeid = '12'), 
+        city:text (sourcetyperadix = '10', description = '', sourcetypesize = '100', sourcetypeid = '12'), 
+        zip:text (sourcetyperadix = '10', description = '', sourcetypesize = '100', sourcetypeid = '12'), 
+        state:text (sourcetyperadix = '10', description = '', sourcetypesize = '100', sourcetypeid = '12'), 
+        primary_phone:text (sourcetyperadix = '10', description = '', sourcetypesize = '100', sourcetypeid = '12')
+    )
+    FOLDER = '/02 - base views'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD address(
+        I18N us_pst
+        CONSTRAINTS (
+             ADD client_fid (any) OPT ANY
+             ADD street (any) OPT ANY
+             ADD city (any) OPT ANY
+             ADD zip (any) OPT ANY
+             ADD state (any) OPT ANY
+             ADD primary_phone (any) OPT ANY
+        )
+        OUTPUTLIST (city, client_fid, primary_phone, state, street, zip
+        )
+        WRAPPER (jdbc address)
+    );
+
