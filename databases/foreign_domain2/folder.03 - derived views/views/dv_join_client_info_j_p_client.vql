@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW dv_join_client_info_j_p_client FOLDER = '/03 - derived views' AS SELECT dv_join_client_info.client_id AS client_id, dv_join_client_info.name AS name, dv_join_client_info.surname AS surname, dv_join_client_info.client_type AS client_type, dv_join_client_info.code AS code, dv_join_client_info.value AS value, dv_join_client_info.key AS key, p_client.client_id AS klantclient_id, p_client.name AS klantname, p_client.surname AS klantsurname, p_client.client_type AS klantclient_type, p_client.key AS klantkey FROM dv_join_client_info AS dv_join_client_info INNER JOIN own_domain.p_client AS p_client ON dv_join_client_info.key = p_client.key ;
+
+ALTER VIEW dv_join_client_info_j_p_client
+ LAYOUT (dv_join_client_info = [20, 20, 200, 166], p_client = [250, 20, 200, 126]);
+
