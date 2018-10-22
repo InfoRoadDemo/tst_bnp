@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW union_historical_operational FOLDER = '/02 - integration_layer' AS SELECT id, datum, description FROM (SELECT * FROM bv_table_historical UNION SELECT description, id, datum FROM bv_table_operational);
+
+ALTER VIEW union_historical_operational
+ LAYOUT (bv_table_historical = [20, 20, 200, 86], bv_table_operational = [250, 20, 200, 86]);
+

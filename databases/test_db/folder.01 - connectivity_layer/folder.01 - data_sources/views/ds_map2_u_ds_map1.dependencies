@@ -1,0 +1,6 @@
+﻿/databases/test_db/folder.01 - connectivity_layer/01 - connectivity_layer.vql
+/databases/test_db/folder.01 - connectivity_layer/folder.01 - data_sources/01 - data_sources.vql
+/databases/test_db/folder.01 - connectivity_layer/folder.01 - data_sources/datasources/custom/ds_map2.vql
+/databases/test_db/folder.01 - connectivity_layer/folder.01 - data_sources/views/ds_map2.vql
+/databases/test_db/folder.01 - connectivity_layer/folder.01 - data_sources/datasources/custom/ds_map1.vql
+/databases/test_db/folder.01 - connectivity_layer/folder.01 - data_sources/views/ds_map1.vql

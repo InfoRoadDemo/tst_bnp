@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW ds_map2_u_ds_map1 FOLDER = '/01 - connectivity_layer/01 - data_sources' AS SELECT column_0, column_1 FROM (SELECT * FROM ds_map2 UNION SELECT column_0, column_1 FROM ds_map1);
+
+ALTER VIEW ds_map2_u_ds_map1
+ LAYOUT (ds_map2 = [20, 20, 200, 66], ds_map1 = [250, 20, 200, 66]);
+

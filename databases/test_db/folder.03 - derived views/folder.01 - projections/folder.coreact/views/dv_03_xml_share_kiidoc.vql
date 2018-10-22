@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW dv_03_xml_share_kiidoc FOLDER = '/03 - derived views/01 - projections/coreact' AS SELECT ("INFORMATIONS")."INFORMATION" AS "INFORMATION", "Name" AS "Name", "CODE" AS "CODE" FROM FLATTEN dv_02_xml_share_kiidoc AS v ( v."CATEGORY") WHERE v."CODE" = 'OBJECTIVES';
+
+ALTER VIEW dv_03_xml_share_kiidoc
+ LAYOUT (dv_02_xml_share_kiidoc = [20, 20, 519, 747]);
+

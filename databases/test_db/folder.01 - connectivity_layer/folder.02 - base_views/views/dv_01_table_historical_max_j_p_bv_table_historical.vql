@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW dv_01_table_historical_max_j_p_bv_table_historical FOLDER = '/01 - connectivity_layer/02 - base_views' AS SELECT p_bv_table_historical.id AS id, p_bv_table_historical.datum AS datum, p_bv_table_historical.description AS description FROM dv_01_table_historical_max AS dv_01_table_historical_max NESTED INNER JOIN p_bv_table_historical AS p_bv_table_historical ON dv_01_table_historical_max.max_date > p_bv_table_historical.datum  WHERE p_bv_table_historical.datum <= dv_01_table_historical_max.max_date;
+
+ALTER VIEW dv_01_table_historical_max_j_p_bv_table_historical
+ LAYOUT (dv_01_table_historical_max = [20, 20, 200, 46], p_bv_table_historical = [250, 20, 200, 86]);
+

@@ -1,0 +1,2 @@
+﻿UNDEPLOY IF EXISTS WEBSERVICE bv_xml_kiidoc_share;
+

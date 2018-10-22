@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW dv_02_xml_share_kiidoc FOLDER = '/03 - derived views/01 - projections/coreact' AS SELECT bv_xml_kiidoc_share."PROPERTIES" AS "PROPERTIES", bv_xml_kiidoc_share."HIERARCHY" AS "HIERARCHY", bv_xml_kiidoc_share."CONDITIONS" AS "CONDITIONS", (bv_xml_kiidoc_share."CATEGORIES")."CATEGORY" AS "CATEGORY", dv_01_sharepoint_list."Name" AS "Name" FROM bv_xml_kiidoc_share AS bv_xml_kiidoc_share RIGHT OUTER JOIN dv_01_sharepoint_list AS dv_01_sharepoint_list ON bv_xml_kiidoc_share."FILENAME" = dv_01_sharepoint_list."Name" ;
+
+ALTER VIEW dv_02_xml_share_kiidoc
+ LAYOUT (bv_xml_kiidoc_share = [20, 20, 200, 126], dv_01_sharepoint_list = [350, 10, 200, 106]);
+

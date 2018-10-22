@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW dv_05_xml_share_kiidoc FOLDER = '/03 - derived views/01 - projections/coreact' AS SELECT substring("Name_file", 0, (position('.' IN "Name_file")-1)) AS "Name_file", replace(replace(group_concat(' ', "VALUE"), char(10), ''), char(32), '') AS "Objective" FROM dv_04_xml_share_kiidoc GROUP BY "Name_file";
+
+ALTER VIEW dv_05_xml_share_kiidoc
+ LAYOUT (dv_04_xml_share_kiidoc = [20, 20, 205, 86]);
+

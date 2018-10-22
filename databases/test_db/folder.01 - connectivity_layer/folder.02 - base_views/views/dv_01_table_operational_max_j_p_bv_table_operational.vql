@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW dv_01_table_operational_max_j_p_bv_table_operational FOLDER = '/01 - connectivity_layer/02 - base_views' AS SELECT p_bv_table_operational.id AS id, p_bv_table_operational.datum AS datum, p_bv_table_operational.description AS description FROM dv_01_table_operational_min AS dv_01_table_operational_max NESTED INNER JOIN p_bv_table_operational AS p_bv_table_operational ON dv_01_table_operational_max.max_date < p_bv_table_operational.datum  WHERE p_bv_table_operational.datum > dv_01_table_operational_max.max_date;
+
+ALTER VIEW dv_01_table_operational_max_j_p_bv_table_operational
+ LAYOUT (dv_01_table_operational_min = [20, 50, 200, 46], p_bv_table_operational = [250, 20, 200, 86]);
+

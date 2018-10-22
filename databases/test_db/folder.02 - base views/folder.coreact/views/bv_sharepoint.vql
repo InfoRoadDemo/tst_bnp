@@ -1,0 +1,119 @@
+﻿CREATE OR REPLACE WRAPPER CUSTOM bv_sharepoint
+    FOLDER = '/02 - base views/coreact'
+    DATASOURCENAME=ds_sharepoint
+    PARAMETERS (
+      'Service Endpoint *' = 'https://doreme.ip.is.echonet/_vti_bin/ListData.svc',
+      'Entity Collection *' = 'APPLibrary',
+      'Service Format *' = 'XML-Atom',
+      'Service Version' = 'V2',
+      'Expand Related Entities' = false,
+      'Use NTLM Authentication' = true,
+      'Enable Pagination' = false,
+      'User' = 'b36170',
+      'Password' = 'NFE8piq/TPGjAA7loSKxyOSo8JyDAXH11K3ccE4KAvAaq8WUDsI8pfQPLmpg2dvFnLw7ObVOrLvLNcyL9a1cb1hKbRRrPFAUvmFSwikDESOck++8dLRLs7HgYjB5e9vn' ENCRYPTED,
+      'NTLM Domain' = 'adroot'
+    )
+    OUTPUTSCHEMA (
+        "ContentTypeID" = 'ContentTypeID' : 'java.lang.String' (OPT) (sourcetypeid='12')  SORTABLE,
+        "ApproverComments" = 'ApproverComments' : 'java.lang.String' (OPT) (sourcetypeid='12')  SORTABLE,
+        "Name" = 'Name' : 'java.lang.String' (OPT) (sourcetypeid='12')  SORTABLE,
+        "Title" = 'Title' : 'java.lang.String' (OPT) (sourcetypeid='12')  SORTABLE,
+        "DocumentIDValue" = 'DocumentIDValue' : 'java.lang.String' (OPT) (sourcetypeid='12')  SORTABLE,
+        "DocumentID" = 'DocumentID' : 'java.lang.String' (OPT) (sourcetypeid='12')  SORTABLE,
+        "ApprovalStatus" = 'ApprovalStatus' : 'java.lang.String' (OPT) (sourcetypeid='12')  SORTABLE,
+        "ActivityTypeId" = 'ActivityTypeId' : 'java.lang.Integer' (OPT) (sourcetypeid='4')  SORTABLE,
+        "DocumentTypeId" = 'DocumentTypeId' : 'java.lang.Integer' (OPT) (sourcetypeid='4')  SORTABLE,
+        "ITLanguageValue" = 'ITLanguageValue' : 'java.lang.String' (OPT) (sourcetypeid='12')  SORTABLE,
+        "APPCodeId" = 'APPCodeId' : 'java.lang.Integer' (OPT) (sourcetypeid='4')  SORTABLE,
+        "Description" = 'Description' : 'java.lang.String' (OPT) (sourcetypeid='12')  SORTABLE,
+        "Manager1Id" = 'Manager1Id' : 'java.lang.Integer' (OPT) (sourcetypeid='4')  SORTABLE,
+        "Manager2Id" = 'Manager2Id' : 'java.lang.Integer' (OPT) (sourcetypeid='4')  SORTABLE,
+        "URL" = 'URL' : 'java.lang.String' (OPT) (sourcetypeid='12')  SORTABLE,
+        "Approval" = 'Approval' : 'java.lang.Integer' (OPT) (sourcetypeid='4')  SORTABLE,
+        "Id" = 'Id' : 'java.lang.Integer' (OPT) (sourcetypeid='4')  NOT NULL SORTABLE,
+        "ContentType" = 'ContentType' : 'java.lang.String' (OPT) (sourcetypeid='12')  SORTABLE,
+        "Created" = 'Created' : 'java.sql.Timestamp' (OPT) (sourcetypeid='93')  SORTABLE,
+        "CreatedById" = 'CreatedById' : 'java.lang.Integer' (OPT) (sourcetypeid='4')  SORTABLE,
+        "Modified" = 'Modified' : 'java.sql.Timestamp' (OPT) (sourcetypeid='93')  SORTABLE,
+        "ModifiedById" = 'ModifiedById' : 'java.lang.Integer' (OPT) (sourcetypeid='4')  SORTABLE,
+        "CopySource" = 'CopySource' : 'java.lang.String' (OPT) (sourcetypeid='12')  SORTABLE,
+        "Path" = 'Path' : 'java.lang.String' (OPT) (sourcetypeid='12')  SORTABLE,
+        "CheckedOutToId" = 'CheckedOutToId' : 'java.lang.Integer' (OPT) (sourcetypeid='4')  SORTABLE,
+        "VirusStatus" = 'VirusStatus' : 'java.lang.String' (OPT) (sourcetypeid='12')  SORTABLE,
+        "IsCurrentVersion" = 'IsCurrentVersion' : 'java.lang.Boolean' (OPT) (sourcetypeid='16')  SORTABLE,
+        "Owshiddenversion" = 'Owshiddenversion' : 'java.lang.Integer' (OPT) (sourcetypeid='4')  SORTABLE,
+        "Version" = 'Version' : 'java.lang.String' (OPT) (sourcetypeid='12')  SORTABLE
+    );
+
+CREATE OR REPLACE TABLE bv_sharepoint I18N be_bnpp_am (
+        "ContentTypeID":text (sourcetypeid = '12'), 
+        "ApproverComments":text (sourcetypeid = '12'), 
+        "Name":text (sourcetypeid = '12'), 
+        "Title":text (sourcetypeid = '12'), 
+        "DocumentIDValue":text (sourcetypeid = '12'), 
+        "DocumentID":text (sourcetypeid = '12'), 
+        "ApprovalStatus":text (sourcetypeid = '12'), 
+        "ActivityTypeId":int (sourcetypeid = '4'), 
+        "DocumentTypeId":int (sourcetypeid = '4'), 
+        "ITLanguageValue":text (sourcetypeid = '12'), 
+        "APPCodeId":int (sourcetypeid = '4'), 
+        "Description":text (sourcetypeid = '12'), 
+        "Manager1Id":int (sourcetypeid = '4'), 
+        "Manager2Id":int (sourcetypeid = '4'), 
+        "URL":text (sourcetypeid = '12'), 
+        "Approval":int (sourcetypeid = '4'), 
+        "Id":int (sourcetypeid = '4'), 
+        "ContentType":text (sourcetypeid = '12'), 
+        "Created":date (sourcetypeid = '93'), 
+        "CreatedById":int (sourcetypeid = '4'), 
+        "Modified":date (sourcetypeid = '93'), 
+        "ModifiedById":int (sourcetypeid = '4'), 
+        "CopySource":text (sourcetypeid = '12'), 
+        "Path":text (sourcetypeid = '12'), 
+        "CheckedOutToId":int (sourcetypeid = '4'), 
+        "VirusStatus":text (sourcetypeid = '12'), 
+        "IsCurrentVersion":boolean (sourcetypeid = '16'), 
+        "Owshiddenversion":int (sourcetypeid = '4'), 
+        "Version":text (sourcetypeid = '12')
+    )
+    FOLDER = '/02 - base views/coreact'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD bv_sharepoint(
+        I18N be_bnpp_am
+        CONSTRAINTS (
+             ADD "ContentTypeID" (any) OPT ANY
+             ADD "ApproverComments" (any) OPT ANY
+             ADD "Name" (any) OPT ANY
+             ADD "Title" (any) OPT ANY
+             ADD "DocumentIDValue" (any) OPT ANY
+             ADD "DocumentID" (any) OPT ANY
+             ADD "ApprovalStatus" (any) OPT ANY
+             ADD "ActivityTypeId" (any) OPT ANY
+             ADD "DocumentTypeId" (any) OPT ANY
+             ADD "ITLanguageValue" (any) OPT ANY
+             ADD "APPCodeId" (any) OPT ANY
+             ADD "Description" (any) OPT ANY
+             ADD "Manager1Id" (any) OPT ANY
+             ADD "Manager2Id" (any) OPT ANY
+             ADD "URL" (any) OPT ANY
+             ADD "Approval" (any) OPT ANY
+             ADD "Id" (any) OPT ANY
+             ADD "ContentType" (any) OPT ANY
+             ADD "Created" (any) OPT ANY
+             ADD "CreatedById" (any) OPT ANY
+             ADD "Modified" (any) OPT ANY
+             ADD "ModifiedById" (any) OPT ANY
+             ADD "CopySource" (any) OPT ANY
+             ADD "Path" (any) OPT ANY
+             ADD "CheckedOutToId" (any) OPT ANY
+             ADD "VirusStatus" (any) OPT ANY
+             ADD "IsCurrentVersion" (any) OPT ANY
+             ADD "Owshiddenversion" (any) OPT ANY
+             ADD "Version" (any) OPT ANY
+        )
+        OUTPUTLIST ("APPCodeId", "ActivityTypeId", "Approval", "ApprovalStatus", "ApproverComments", "CheckedOutToId", "ContentType", "ContentTypeID", "CopySource", "Created", "CreatedById", "Description", "DocumentID", "DocumentIDValue", "DocumentTypeId", "ITLanguageValue", "Id", "IsCurrentVersion", "Manager1Id", "Manager2Id", "Modified", "ModifiedById", "Name", "Owshiddenversion", "Path", "Title", "URL", "Version", "VirusStatus"
+        )
+        WRAPPER (custom bv_sharepoint)
+    );
+

@@ -1,0 +1,21 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE DATASOURCE CUSTOM ds_map2
+    FOLDER = '/01 - connectivity_layer/01 - data_sources'
+    CLASSNAME='com.denodo.vdb.contrib.wrapper.xls.ExcelWrapper';
+
+CREATE OR REPLACE WRAPPER CUSTOM ds_map2
+    FOLDER = '/01 - connectivity_layer/01 - data_sources'
+    DATASOURCENAME=ds_map2
+    PARAMETERS (
+      'Type of file' = 'Excel 2007 or later (*.xlsx)',
+      'File location' = ROUTE LOCAL 'LocalConnection' '${databases.test_db.folder.01 - connectivity_layer.folder.01 - data_sources.views.custom.ds_map2.File location.ROUTE.LOCAL.PATH}',
+      'Extract data from all sheets' = true,
+      'Extract sheet name as a new column' = false,
+      'Has headers' = false,
+      'Stream tuples' = true
+    )
+    OUTPUTSCHEMA (
+        column_0 = 'Column_0' : 'java.lang.Integer' (OPT) (sourcetypeid='4')  SORTABLE,
+        column_1 = 'Column_1' : 'java.lang.String' (OPT) (sourcetypeid='12')  SORTABLE
+    );
+

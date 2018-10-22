@@ -1,0 +1,10 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE DATASOURCE XML ds_xml_kiidoc_copy
+    FOLDER = '/01 - data sources'
+    ROUTE HTTP 'http.CommonsHttpClientConnection,120000' GET '${databases.test_db.folder.01 - data sources.datasources.xml.ds_xml_kiidoc_copy.ROUTE.HTTP.URL}'
+    AUTHENTICATION NTLM ( 
+      USER '${databases.test_db.folder.01 - data sources.datasources.xml.ds_xml_kiidoc_copy.ROUTE.HTTP.USER}'
+      PASSWORD '${databases.test_db.folder.01 - data sources.datasources.xml.ds_xml_kiidoc_copy.ROUTE.HTTP.PASSWORD}' ${databases.test_db.folder.01 - data sources.datasources.xml.ds_xml_kiidoc_copy.ROUTE.HTTP.PASSWORD.ENCRYPTED}
+      DOMAIN '${databases.test_db.folder.01 - data sources.datasources.xml.ds_xml_kiidoc_copy.ROUTE.HTTP.DOMAIN}' )
+    PROXY OFF;
+

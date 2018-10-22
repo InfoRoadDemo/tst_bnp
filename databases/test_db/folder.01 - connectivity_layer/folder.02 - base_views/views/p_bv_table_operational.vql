@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW p_bv_table_operational FOLDER = '/01 - connectivity_layer/02 - base_views' AS SELECT bv_table_operational.id AS id, bv_table_operational.datum AS datum, bv_table_operational.description AS description FROM bv_table_operational;
+
+ALTER VIEW p_bv_table_operational
+ LAYOUT (bv_table_operational = [20, 20, 200, 86]);
+

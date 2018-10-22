@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW dv_01_sharepoint_list FOLDER = '/03 - derived views/01 - projections/coreact' AS SELECT bv_sharepoint."Name" AS "Name", bv_sharepoint."Title" AS "Title", bv_sharepoint."DocumentIDValue" AS "DocumentIDValue", bv_sharepoint."DocumentID" AS "DocumentID" FROM bv_sharepoint WHERE "Path" = '/APP Library/HORUS/99 - Archive';
+
+ALTER VIEW dv_01_sharepoint_list
+ LAYOUT (bv_sharepoint = [20, 20, 222, 606]);
+

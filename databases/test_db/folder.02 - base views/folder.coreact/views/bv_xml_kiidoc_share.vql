@@ -1,0 +1,182 @@
+﻿CREATE OR REPLACE WRAPPER XML ds_xml_kiidoc_copy
+    FOLDER = '/02 - base views/coreact'
+    DATASOURCENAME=ds_xml_kiidoc_copy
+    TUPLEROOT 'DOCUMENT'
+    OUTPUTSCHEMA ("DOCUMENT" = 'DOCUMENT' : REGISTER OF (
+        "FILENAME" = 'FILENAME' : 'java.lang.String' (OBL) (DEFAULTVALUE='KIIDOC-2017-11-08-fr-FR_LU-2017-11-08-FR0013041530.xml') EXTERN,
+        "PROPERTIES" = 'PROPERTIES' : REGISTER OF (
+            "ID" = 'ID' : 'java.lang.Integer',
+            "PROJECT_ID" = 'PROJECT_ID' : 'java.lang.Short',
+            "NAME" = 'NAME' : 'java.lang.String',
+            "ISIN" = 'ISIN' : 'java.lang.String',
+            "FILE_NAME" = 'FILE_NAME' : 'java.lang.String',
+            "LANGUAGE_CODE" = 'LANGUAGE_CODE' : 'java.lang.String',
+            "VALID_FROM" = 'VALID_FROM' : 'java.lang.String',
+            "CREATION_DATE" = 'CREATION_DATE' : 'java.lang.String',
+            "COUNTRIES" = 'COUNTRIES' : REGISTER OF (
+                "COUNTRY" = 'COUNTRY' : ARRAY OF (
+                    "register_COUNTRY" = 'COUNTRY' : REGISTER OF (
+                        "COUNTRY" = 'COUNTRY' : 'java.lang.String'
+                    )
+                )
+            )
+        ),
+        "HIERARCHY" = 'HIERARCHY' : REGISTER OF (
+            "SPONSOR" = 'SPONSOR' : REGISTER OF (
+                "CODE" = 'CODE' : 'java.lang.String',
+                "NAME" = 'NAME' : 'java.lang.String'
+            ),
+            "FUND" = 'FUND' : REGISTER OF (
+                "CODE" = 'CODE' : 'java.lang.Short',
+                "NAME" = 'NAME' : 'java.lang.String'
+            ),
+            "SUB_FOND" = 'SUB_FOND' : REGISTER OF (
+                "CODE" = 'CODE' : 'java.lang.Short',
+                "NAME" = 'NAME' : 'java.lang.String'
+            ),
+            "SHARE_CLASS" = 'SHARE_CLASS' : REGISTER OF (
+                "ISIN" = 'ISIN' : 'java.lang.String',
+                "CODE" = 'CODE' : 'java.lang.Short',
+                "NAME" = 'NAME' : 'java.lang.String'
+            )
+        ),
+        "CONDITIONS" = 'CONDITIONS' : REGISTER OF (
+            "CONDITION" = 'CONDITION' : ARRAY OF (
+                "CONDITION" = 'CONDITION' : REGISTER OF (
+                    "CODE" = '#CODE' : 'java.lang.String',
+                    "RESULT" = '#RESULT' : 'java.lang.Boolean',
+                    "CONDITION" = 'CONDITION' : 'java.lang.String'
+                )
+            )
+        ),
+        "CATEGORIES" = 'CATEGORIES' : REGISTER OF (
+            "CATEGORY" = 'CATEGORY' : ARRAY OF (
+                "CATEGORY" = 'CATEGORY' : REGISTER OF (
+                    "CODE" = '#CODE' : 'java.lang.String',
+                    "INFORMATIONS" = 'INFORMATIONS' : REGISTER OF (
+                        "INFORMATION" = 'INFORMATION' : ARRAY OF (
+                            "INFORMATION" = 'INFORMATION' : REGISTER OF (
+                                "ID" = '#ID' : 'java.lang.Integer',
+                                "VALID_FROM" = '#VALID_FROM' : 'java.lang.String',
+                                "CODE" = '#CODE' : 'java.lang.String',
+                                "LEVEL" = '#LEVEL' : 'java.lang.String',
+                                "NAME" = 'NAME' : 'java.lang.String',
+                                "VALUE" = 'VALUE' : REGISTER OF (
+                                    "BASE_TYPE" = '#BASE_TYPE' : 'java.lang.String',
+                                    "VALUE" = 'VALUE' : 'java.lang.String'
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+    )
+    );
+
+CREATE OR REPLACE TYPE "ds_xml_kiidoc_copy_PROPERTIES_COUNTRIES_COUNTRY_register_COUNTRY" AS REGISTER OF ("COUNTRY":text);
+
+CREATE OR REPLACE TYPE "ds_xml_kiidoc_copy_PROPERTIES_COUNTRIES_COUNTRY" AS ARRAY OF "ds_xml_kiidoc_copy_PROPERTIES_COUNTRIES_COUNTRY_register_COUNTRY";
+
+CREATE OR REPLACE TYPE "ds_xml_kiidoc_copy_PROPERTIES_COUNTRIES" AS REGISTER OF ("COUNTRY":"ds_xml_kiidoc_copy_PROPERTIES_COUNTRIES_COUNTRY");
+
+CREATE OR REPLACE TYPE "ds_xml_kiidoc_copy_PROPERTIES" AS REGISTER OF ("ID":int, "PROJECT_ID":int, "NAME":text, "ISIN":text, "FILE_NAME":text, "LANGUAGE_CODE":text, "VALID_FROM":text, "CREATION_DATE":text, "COUNTRIES":"ds_xml_kiidoc_copy_PROPERTIES_COUNTRIES");
+
+CREATE OR REPLACE TYPE "ds_xml_kiidoc_copy_HIERARCHY_SPONSOR" AS REGISTER OF ("CODE":text, "NAME":text);
+
+CREATE OR REPLACE TYPE "ds_xml_kiidoc_copy_HIERARCHY_FUND" AS REGISTER OF ("CODE":int, "NAME":text);
+
+CREATE OR REPLACE TYPE "ds_xml_kiidoc_copy_HIERARCHY_SUB_FOND" AS REGISTER OF ("CODE":int, "NAME":text);
+
+CREATE OR REPLACE TYPE "ds_xml_kiidoc_copy_HIERARCHY_SHARE_CLASS" AS REGISTER OF ("ISIN":text, "CODE":int, "NAME":text);
+
+CREATE OR REPLACE TYPE "ds_xml_kiidoc_copy_HIERARCHY" AS REGISTER OF ("SPONSOR":"ds_xml_kiidoc_copy_HIERARCHY_SPONSOR", "FUND":"ds_xml_kiidoc_copy_HIERARCHY_FUND", "SUB_FOND":"ds_xml_kiidoc_copy_HIERARCHY_SUB_FOND", "SHARE_CLASS":"ds_xml_kiidoc_copy_HIERARCHY_SHARE_CLASS");
+
+CREATE OR REPLACE TYPE "ds_xml_kiidoc_copy_CONDITIONS_CONDITION_CONDITION" AS REGISTER OF ("CODE":text, "RESULT":boolean, "CONDITION":text);
+
+CREATE OR REPLACE TYPE "ds_xml_kiidoc_copy_CONDITIONS_CONDITION" AS ARRAY OF "ds_xml_kiidoc_copy_CONDITIONS_CONDITION_CONDITION";
+
+CREATE OR REPLACE TYPE "ds_xml_kiidoc_copy_CONDITIONS" AS REGISTER OF ("CONDITION":"ds_xml_kiidoc_copy_CONDITIONS_CONDITION");
+
+CREATE OR REPLACE TYPE "ds_xml_kiidoc_copy_CATEGORIES_CATEGORY_CATEGORY_INFORMATIONS_INFORMATION_INFORMATION_VALUE" AS REGISTER OF ("BASE_TYPE":text, "VALUE":text);
+
+CREATE OR REPLACE TYPE "ds_xml_kiidoc_copy_CATEGORIES_CATEGORY_CATEGORY_INFORMATIONS_INFORMATION_INFORMATION" AS REGISTER OF ("ID":int, "VALID_FROM":text, "CODE":text, "LEVEL":text, "NAME":text, "VALUE":"ds_xml_kiidoc_copy_CATEGORIES_CATEGORY_CATEGORY_INFORMATIONS_INFORMATION_INFORMATION_VALUE");
+
+CREATE OR REPLACE TYPE "ds_xml_kiidoc_copy_CATEGORIES_CATEGORY_CATEGORY_INFORMATIONS_INFORMATION" AS ARRAY OF "ds_xml_kiidoc_copy_CATEGORIES_CATEGORY_CATEGORY_INFORMATIONS_INFORMATION_INFORMATION";
+
+CREATE OR REPLACE TYPE "ds_xml_kiidoc_copy_CATEGORIES_CATEGORY_CATEGORY_INFORMATIONS" AS REGISTER OF ("INFORMATION":"ds_xml_kiidoc_copy_CATEGORIES_CATEGORY_CATEGORY_INFORMATIONS_INFORMATION");
+
+CREATE OR REPLACE TYPE "ds_xml_kiidoc_copy_CATEGORIES_CATEGORY_CATEGORY" AS REGISTER OF ("CODE":text, "INFORMATIONS":"ds_xml_kiidoc_copy_CATEGORIES_CATEGORY_CATEGORY_INFORMATIONS");
+
+CREATE OR REPLACE TYPE "ds_xml_kiidoc_copy_CATEGORIES_CATEGORY" AS ARRAY OF "ds_xml_kiidoc_copy_CATEGORIES_CATEGORY_CATEGORY";
+
+CREATE OR REPLACE TYPE "ds_xml_kiidoc_copy_CATEGORIES" AS REGISTER OF ("CATEGORY":"ds_xml_kiidoc_copy_CATEGORIES_CATEGORY");
+
+CREATE OR REPLACE TABLE bv_xml_kiidoc_share I18N be_bnpp_am (
+        "FILENAME":text (defaultvalue = 'KIIDOC-2017-11-08-fr-FR_LU-2017-11-08-FR0013041530.xml'), 
+        "PROPERTIES":"ds_xml_kiidoc_copy_PROPERTIES", 
+        "HIERARCHY":"ds_xml_kiidoc_copy_HIERARCHY", 
+        "CONDITIONS":"ds_xml_kiidoc_copy_CONDITIONS", 
+        "CATEGORIES":"ds_xml_kiidoc_copy_CATEGORIES"
+    )
+    FOLDER = '/02 - base views/coreact'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD ds_xml_kiidoc_copy(
+        I18N be_bnpp_am
+        CONSTRAINTS (
+             ADD "FILENAME" (=) OBL ONE
+             ADD "PROPERTIES" NOS ZERO ()
+             ADD "PROPERTIES"."ID" NOS ZERO ()
+             ADD "PROPERTIES"."PROJECT_ID" NOS ZERO ()
+             ADD "PROPERTIES"."NAME" NOS ZERO ()
+             ADD "PROPERTIES"."ISIN" NOS ZERO ()
+             ADD "PROPERTIES"."FILE_NAME" NOS ZERO ()
+             ADD "PROPERTIES"."LANGUAGE_CODE" NOS ZERO ()
+             ADD "PROPERTIES"."VALID_FROM" NOS ZERO ()
+             ADD "PROPERTIES"."CREATION_DATE" NOS ZERO ()
+             ADD "PROPERTIES"."COUNTRIES" NOS ZERO ()
+             ADD "PROPERTIES"."COUNTRIES"."COUNTRY" NOS ZERO ()
+             ADD "PROPERTIES"."COUNTRIES"."COUNTRY" NOS ZERO ()
+             ADD "PROPERTIES"."COUNTRIES"."COUNTRY"."COUNTRY" NOS ZERO ()
+             ADD "HIERARCHY" NOS ZERO ()
+             ADD "HIERARCHY"."SPONSOR" NOS ZERO ()
+             ADD "HIERARCHY"."SPONSOR"."CODE" NOS ZERO ()
+             ADD "HIERARCHY"."SPONSOR"."NAME" NOS ZERO ()
+             ADD "HIERARCHY"."FUND" NOS ZERO ()
+             ADD "HIERARCHY"."FUND"."CODE" NOS ZERO ()
+             ADD "HIERARCHY"."FUND"."NAME" NOS ZERO ()
+             ADD "HIERARCHY"."SUB_FOND" NOS ZERO ()
+             ADD "HIERARCHY"."SUB_FOND"."CODE" NOS ZERO ()
+             ADD "HIERARCHY"."SUB_FOND"."NAME" NOS ZERO ()
+             ADD "HIERARCHY"."SHARE_CLASS" NOS ZERO ()
+             ADD "HIERARCHY"."SHARE_CLASS"."ISIN" NOS ZERO ()
+             ADD "HIERARCHY"."SHARE_CLASS"."CODE" NOS ZERO ()
+             ADD "HIERARCHY"."SHARE_CLASS"."NAME" NOS ZERO ()
+             ADD "CONDITIONS" NOS ZERO ()
+             ADD "CONDITIONS"."CONDITION" NOS ZERO ()
+             ADD "CONDITIONS"."CONDITION" NOS ZERO ()
+             ADD "CONDITIONS"."CONDITION"."CODE" NOS ZERO ()
+             ADD "CONDITIONS"."CONDITION"."RESULT" NOS ZERO ()
+             ADD "CONDITIONS"."CONDITION"."CONDITION" NOS ZERO ()
+             ADD "CATEGORIES" NOS ZERO ()
+             ADD "CATEGORIES"."CATEGORY" NOS ZERO ()
+             ADD "CATEGORIES"."CATEGORY" NOS ZERO ()
+             ADD "CATEGORIES"."CATEGORY"."CODE" NOS ZERO ()
+             ADD "CATEGORIES"."CATEGORY"."INFORMATIONS" NOS ZERO ()
+             ADD "CATEGORIES"."CATEGORY"."INFORMATIONS"."INFORMATION" NOS ZERO ()
+             ADD "CATEGORIES"."CATEGORY"."INFORMATIONS"."INFORMATION" NOS ZERO ()
+             ADD "CATEGORIES"."CATEGORY"."INFORMATIONS"."INFORMATION"."ID" NOS ZERO ()
+             ADD "CATEGORIES"."CATEGORY"."INFORMATIONS"."INFORMATION"."VALID_FROM" NOS ZERO ()
+             ADD "CATEGORIES"."CATEGORY"."INFORMATIONS"."INFORMATION"."CODE" NOS ZERO ()
+             ADD "CATEGORIES"."CATEGORY"."INFORMATIONS"."INFORMATION"."LEVEL" NOS ZERO ()
+             ADD "CATEGORIES"."CATEGORY"."INFORMATIONS"."INFORMATION"."NAME" NOS ZERO ()
+             ADD "CATEGORIES"."CATEGORY"."INFORMATIONS"."INFORMATION"."VALUE" NOS ZERO ()
+             ADD "CATEGORIES"."CATEGORY"."INFORMATIONS"."INFORMATION"."VALUE"."BASE_TYPE" NOS ZERO ()
+             ADD "CATEGORIES"."CATEGORY"."INFORMATIONS"."INFORMATION"."VALUE"."VALUE" NOS ZERO ()
+        )
+        OUTPUTLIST ("CATEGORIES", "CONDITIONS", "HIERARCHY", "PROPERTIES"
+        )
+        WRAPPER (xml ds_xml_kiidoc_copy)
+    );
+

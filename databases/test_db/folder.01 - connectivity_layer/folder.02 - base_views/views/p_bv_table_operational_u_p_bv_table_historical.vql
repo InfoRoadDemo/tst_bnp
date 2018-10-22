@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW p_bv_table_operational_u_p_bv_table_historical FOLDER = '/01 - connectivity_layer/02 - base_views' AS SELECT id, datum, description FROM (SELECT * FROM p_bv_table_operational UNION SELECT description, datum, id FROM p_bv_table_historical);
+
+ALTER VIEW p_bv_table_operational_u_p_bv_table_historical
+ LAYOUT (p_bv_table_operational = [20, 20, 200, 86], p_bv_table_historical = [250, 20, 200, 86]);
+

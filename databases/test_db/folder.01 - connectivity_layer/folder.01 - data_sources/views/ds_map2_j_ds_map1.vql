@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW ds_map2_j_ds_map1 FOLDER = '/01 - connectivity_layer/01 - data_sources' AS SELECT ds_map2.column_0 AS map2_column_0, ds_map2.column_1 AS map2_column_1, ds_map1.column_0 AS map1_column_0, ds_map1.column_1 AS map1_column_1 FROM ds_map2 AS ds_map2 NESTED LEFT OUTER JOIN ds_map1 AS ds_map1 ON ds_map2.column_0 = ds_map1.column_0 ;
+
+ALTER VIEW ds_map2_j_ds_map1
+ LAYOUT (ds_map2 = [20, 50, 200, 66], ds_map1 = [440, 20, 200, 66]);
+

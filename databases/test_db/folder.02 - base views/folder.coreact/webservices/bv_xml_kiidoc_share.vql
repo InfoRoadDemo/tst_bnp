@@ -1,0 +1,24 @@
+﻿CREATE OR REPLACE REST WEBSERVICE bv_xml_kiidoc_share
+    CONNECTION (
+        CHUNKSIZE = 1000
+        CHUNKTIMEOUT = 90000
+        QUERYTIMEOUT = 900000
+        POOLENABLED = true
+        POOLINITSIZE = 0
+        POOLMAXACTIVE = 30
+    )
+    DEFAULTREPRESENTATION = HTML
+    SUPPORTEDREPRESENTATIONS (HTML, XML, JSON)
+    RESOURCES (
+        VIEW bv_xml_kiidoc_share FIELDS (
+            "FILENAME" : 'text' OBL, 
+            "PROPERTIES" : 'ds_xml_kiidoc_copy_PROPERTIES', 
+            "HIERARCHY" : 'ds_xml_kiidoc_copy_HIERARCHY', 
+            "CONDITIONS" : 'ds_xml_kiidoc_copy_CONDITIONS', 
+            "CATEGORIES" : 'ds_xml_kiidoc_copy_CATEGORIES'
+        )
+    )
+    OPTIONS ( NULLVALUESASEMPTYXMLELEMENTS = false ) 
+    OPENAPI2 ( API_VERSION = '1.0.0' ) 
+    FOLDER = '/02 - base views/coreact';
+

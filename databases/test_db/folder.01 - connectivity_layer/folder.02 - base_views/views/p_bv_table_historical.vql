@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW p_bv_table_historical FOLDER = '/01 - connectivity_layer/02 - base_views' AS SELECT bv_table_historical.id AS id, bv_table_historical.datum AS datum, bv_table_historical.description AS description FROM bv_table_historical;
+
+ALTER VIEW p_bv_table_historical
+ LAYOUT (bv_table_historical = [20, 20, 200, 86]);
+

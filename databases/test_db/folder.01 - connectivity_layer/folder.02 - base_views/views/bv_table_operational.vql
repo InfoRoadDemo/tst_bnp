@@ -1,0 +1,36 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC bv_table_operational
+    FOLDER = '/01 - connectivity_layer/02 - base_views'
+    DATASOURCENAME=sqlexpress
+    CATALOGNAME = '${databases.test_db.folder.01 - connectivity_layer.folder.02 - base_views.views.jdbc.bv_table_operational.CATALOGNAME}'
+    SCHEMANAME = '${databases.test_db.folder.01 - connectivity_layer.folder.02 - base_views.views.jdbc.bv_table_operational.SCHEMANAME}'
+    RELATIONNAME='table_Operational' 
+    OUTPUTSCHEMA (
+        id = 'ID' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='int')  SORTABLE,
+        datum = 'datum' :'java.time.LocalDateTime' (OPT) (sourcetypedecimals='3', sourcetypesize='23', sourcetypeid='93', sourcetypename='datetime')  SORTABLE,
+        description = 'description' :'java.lang.String' (OPT) (sourcetypesize='50', sourcetypeid='12', sourcetypename='varchar')  SORTABLE
+    );
+
+CREATE OR REPLACE TABLE bv_table_operational I18N be_euro (
+        id:int (sourcetypedecimals = '0', sourcetyperadix = '10', sourcetypesize = '10', sourcetypeid = '4'), 
+        datum:timestamp (sourcetypedecimals = '3', sourcetypesize = '23', sourcetypeid = '93'), 
+        description:text (sourcetypesize = '50', sourcetypeid = '12')
+    )
+    FOLDER = '/01 - connectivity_layer/02 - base_views'
+    CACHE OFF
+    BATCHSIZEINCACHE DEFAULT
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD bv_table_operational(
+        I18N be_euro
+        CONSTRAINTS (
+             ADD id (any) OPT ANY
+             ADD datum (any) OPT ANY
+             ADD description (any) OPT ANY
+        )
+        OUTPUTLIST (datum, description, id
+        )
+        WRAPPER (jdbc bv_table_operational)
+    )
+    DELEGATESTATSQUERY = false
+    SMART_THEN_ATSOURCE_THROUGH_VDP;
+

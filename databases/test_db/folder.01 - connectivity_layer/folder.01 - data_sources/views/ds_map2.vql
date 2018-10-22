@@ -1,0 +1,18 @@
+﻿CREATE OR REPLACE TABLE ds_map2 I18N be_euro (
+        column_0:int (sourcetypeid = '4'), 
+        column_1:text (sourcetypeid = '12')
+    )
+    FOLDER = '/01 - connectivity_layer/01 - data_sources'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD ds_map2(
+        I18N be_euro
+        CONSTRAINTS (
+             ADD column_0 (any) OPT ANY
+             ADD column_1 (any) OPT ANY
+        )
+        OUTPUTLIST (column_0, column_1
+        )
+        WRAPPER (custom ds_map2)
+    );
+

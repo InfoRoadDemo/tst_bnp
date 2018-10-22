@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW dv_01_table_operational_max_j_p_bv_table_operational_u_dv_01_table_historical_max_j_p_bv_table_histo FOLDER = '/01 - connectivity_layer/02 - base_views' AS SELECT id, datum, description FROM (SELECT * FROM dv_01_table_operational_max_j_p_bv_table_operational UNION SELECT datum, id, description FROM dv_01_table_historical_max_j_p_bv_table_historical);
+
+ALTER VIEW dv_01_table_operational_max_j_p_bv_table_operational_u_dv_01_table_historical_max_j_p_bv_table_histo
+ LAYOUT (dv_01_table_operational_max_j_p_bv_table_operational = [20, 20, 200, 86], dv_01_table_historical_max_j_p_bv_table_historical = [250, 20, 200, 86]);
+
